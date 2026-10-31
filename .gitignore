@@ -31,3 +31,10 @@ dist-ssr
 # Marketing site — hosted separately (Apache, own domain), not part of this repo
 /website/
 
+# Tauri / Rust derleme dizini
+src-tauri/target/
+
+# Çevre değişkenleri ve gizli anahtarlar
+.env
+.env.*
+*.pem
