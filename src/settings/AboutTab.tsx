@@ -73,10 +73,10 @@ export function AboutTab({
   };
 
   const getIconCacheLabel = () => {
-    if (iconStatus === "working") return "Refreshing...";
-    if (iconStatus === "done") return "Icons refreshed!";
-    if (iconStatus === "error") return "Couldn't refresh icons";
-    return "Refresh App Icons";
+    if (iconStatus === "working") return "Yenileniyor...";
+    if (iconStatus === "done") return "Simgeler yenilendi!";
+    if (iconStatus === "error") return "Simgeler yenilenemedi";
+    return "Uygulama Simgelerini Yenile";
   };
 
   const toggleHitboxLogging = () => {
@@ -86,87 +86,87 @@ export function AboutTab({
   };
 
   const getDiagLabel = () => {
-    if (diagStatus === "working") return "Collecting...";
-    if (diagStatus === "copied") return "Copied to clipboard!";
-    if (diagStatus === "error") return "Couldn't copy — open the log folder instead";
-    return "Copy Diagnostics";
+    if (diagStatus === "working") return "Toplanıyor...";
+    if (diagStatus === "copied") return "Panoya kopyalandı!";
+    if (diagStatus === "error") return "Kopyalanamadı — bunun yerine günlük klasörünü açın";
+    return "Tanılama Bilgilerini Kopyala";
   };
 
   const getUpdateLabel = () => {
     switch (updateStatus) {
       case "checking":
-        return "Checking...";
+        return "Denetleniyor...";
       case "available":
-        return `Update Available (v${updateVersion})`;
+        return `Güncelleme Mevcut (v${updateVersion})`;
       case "uptodate":
-        return "Nectar is up to date";
+        return "Nectar güncel";
       case "downloading":
-        return "Downloading Update...";
+        return "Güncelleme İndiriliyor...";
       case "installing":
-        return "Installing...";
+        return "Yükleniyor...";
       case "error":
-        return "No updates found";
+        return "Güncelleme bulunamadı";
       default:
-        return "Check for Updates";
+        return "Güncellemeleri Denetle";
     }
   };
 
   const getUpdateDesc = () =>
-    updateStatus === "available" ? "Click to install and restart" : `Currently running v${appVersion}`;
+    updateStatus === "available" ? "Yüklemek ve yeniden başlatmak için tıklayın" : `Şu anda v${appVersion} çalışıyor`;
 
   const getPillLabel = () => {
     switch (updateStatus) {
       case "checking":
-        return "Checking...";
+        return "Denetleniyor...";
       case "available":
-        return `Update to v${updateVersion}`;
+        return `v${updateVersion} sürümüne güncelle`;
       case "uptodate":
-        return "Up to date";
+        return "Güncel";
       case "downloading":
-        return "Downloading...";
+        return "İndiriliyor...";
       case "installing":
-        return "Installing...";
+        return "Yükleniyor...";
       case "error":
-        return "Retry check";
+        return "Denetimi yeniden dene";
       default:
-        return "Check for updates";
+        return "Güncellemeleri denetle";
     }
   };
 
   const pillBusy = ["checking", "downloading", "installing"].includes(updateStatus);
 
   const getExportLabel = () => {
-    if (exportStatus === "exporting") return "Exporting...";
-    if (exportStatus === "success") return "Exported!";
-    return "Export Settings";
+    if (exportStatus === "exporting") return "Dışa aktarılıyor...";
+    if (exportStatus === "success") return "Dışa aktarıldı!";
+    return "Ayarları Dışa Aktar";
   };
 
   const getImportLabel = () => {
-    if (importStatus === "importing") return "Importing...";
-    if (importStatus === "success") return "Imported!";
-    return "Import Settings";
+    if (importStatus === "importing") return "İçe aktarılıyor...";
+    if (importStatus === "success") return "İçe aktarıldı!";
+    return "Ayarları İçe Aktar";
   };
 
   const getResetLabel = () => {
-    if (resetStatus === "resetting") return "Resetting...";
-    if (resetStatus === "confirm") return "Click Again to Confirm";
-    return "Reset to Defaults";
+    if (resetStatus === "resetting") return "Sıfırlanıyor...";
+    if (resetStatus === "confirm") return "Onaylamak için Tekrar Tıklayın";
+    return "Varsayılanlara Sıfırla";
   };
 
   const getResetDesc = () =>
-    resetStatus === "confirm" ? "This will erase all settings — cannot be undone" : "Restore all settings to defaults";
+    resetStatus === "confirm" ? "Bu işlem tüm ayarları siler — geri alınamaz" : "Tüm ayarları varsayılan değerlere döndür";
 
   const getUninstallLabel = () => {
-    if (uninstallStatus === "uninstalling") return "Uninstalling...";
-    if (uninstallStatus === "confirm") return "Click Again to Confirm";
-    if (uninstallStatus === "error") return "Couldn't Start Uninstaller";
-    return "Uninstall Nectar";
+    if (uninstallStatus === "uninstalling") return "Kaldırılıyor...";
+    if (uninstallStatus === "confirm") return "Onaylamak için Tekrar Tıklayın";
+    if (uninstallStatus === "error") return "Kaldırıcı Başlatılamadı";
+    return "Nectar'ı Kaldır";
   };
 
   const getUninstallDesc = () => {
-    if (uninstallStatus === "confirm") return "This will remove Nectar from your computer";
-    if (uninstallStatus === "error") return uninstallError || "Try again, or use Windows Settings > Apps";
-    return "Doesn't require Windows Settings to be open";
+    if (uninstallStatus === "confirm") return "Bu işlem Nectar'ı bilgisayarınızdan kaldırır";
+    if (uninstallStatus === "error") return uninstallError || "Tekrar deneyin veya Windows Ayarlar > Uygulamalar'ı kullanın";
+    return "Windows Ayarları'nın açık olmasını gerektirmez";
   };
 
 
@@ -175,7 +175,7 @@ export function AboutTab({
       <div className="about-header">
         <img src="/nectar.png" className="about-logo" alt="Nectar Logo" />
         <h1 className="about-title">Nectar</h1>
-        <p className="about-version">Version {appVersion || "—"}</p>
+        <p className="about-version">Sürüm {appVersion || "—"}</p>
         <button
           className={`update-pill update-pill--${updateStatus || "idle"}`}
           disabled={pillBusy}
@@ -185,9 +185,9 @@ export function AboutTab({
         </button>
       </div>
 
-      <div className="setting-group-label">Software Updates</div>
+      <div className="setting-group-label">Yazılım Güncellemeleri</div>
       <div className="setting-group">
-        <SettingRow icon={Download} label="Auto Update" desc="Update automatically on startup">
+        <SettingRow icon={Download} label="Otomatik Güncelleme" desc="Başlangıçta otomatik olarak güncelle">
           <label className="toggle-switch">
             <input type="checkbox" checked={autoUpdate} onChange={toggleAutoUpdate} />
             <span className="slider"></span>
@@ -205,16 +205,16 @@ export function AboutTab({
       </div>
 
       <div className="setting-group-label setting-group-label--spaced">
-        Data
+        Veriler
       </div>
       <div className="setting-group">
-        <SettingRow icon={Compass} label="Replay Tour" desc="Walk through the notch, Control Center and dock again" action onClick={() => emit("start-tour")} />
-        <SettingRow icon={FileDown} label={getExportLabel()} desc="Save settings to a file" action onClick={handleExportSettings} />
-        <SettingRow icon={Upload} label={getImportLabel()} desc="Load settings from a file" action onClick={handleImportSettings} />
+        <SettingRow icon={Compass} label="Turu Yeniden İzle" desc="Çentiği, Denetim Merkezi'ni ve dock'u yeniden keşfedin" action onClick={() => emit("start-tour")} />
+        <SettingRow icon={FileDown} label={getExportLabel()} desc="Ayarları bir dosyaya kaydet" action onClick={handleExportSettings} />
+        <SettingRow icon={Upload} label={getImportLabel()} desc="Ayarları bir dosyadan yükle" action onClick={handleImportSettings} />
         <SettingRow
           icon={ImageIcon}
           label={getIconCacheLabel()}
-          desc="Re-read app icons if one looks wrong or missing"
+          desc="Bir uygulama simgesi yanlış veya eksik görünüyorsa yeniden oku"
           action
           onClick={refreshIconCache}
         />
@@ -230,21 +230,21 @@ export function AboutTab({
       </div>
 
       <div className="setting-group-label setting-group-label--spaced">
-        Diagnostics
+        Tanılama
       </div>
       <div className="setting-group">
         <SettingRow
           icon={ClipboardCopy}
           label={getDiagLabel()}
-          desc="System info and recent log, to paste into a bug report"
+          desc="Hata raporuna yapıştırmak için sistem bilgileri ve son günlük kaydı"
           action
           onClick={copyDiagnostics}
         />
-        <SettingRow icon={FolderOpen} label="Open Log Folder" desc="nectar.log and diagnostics.txt" action onClick={() => invoke("open_log_folder").catch(() => {})} />
+        <SettingRow icon={FolderOpen} label="Günlük Klasörünü Aç" desc="nectar.log ve diagnostics.txt" action onClick={() => invoke("open_log_folder").catch(() => {})} />
         <SettingRow
           icon={Crosshair}
-          label="Log Dock and Notch Clicks"
-          desc="Turn on, move over the dock and notch for a few seconds, then copy diagnostics. Resets on restart"
+          label="Dock ve Çentik Tıklamalarını Günlüğe Kaydet"
+          desc="Açın, birkaç saniye boyunca dock ve çentiğin üzerine gelin, ardından tanılama bilgilerini kopyalayın. Yeniden başlatmada sıfırlanır"
           divider={false}
         >
           <label className="toggle-switch">
@@ -255,7 +255,7 @@ export function AboutTab({
       </div>
 
       <div className="setting-group-label setting-group-label--spaced">
-        Danger Zone
+        Tehlikeli Bölge
       </div>
       <div className="setting-group">
         <SettingRow
@@ -270,7 +270,7 @@ export function AboutTab({
       </div>
 
       <div className="about-footer">
-        <p>Made with ❤️ by kua8</p>
+        <p>kua8 tarafından ❤️ ile yapıldı</p>
       </div>
     </div>
   );

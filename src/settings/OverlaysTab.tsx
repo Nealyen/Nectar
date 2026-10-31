@@ -24,9 +24,9 @@ export function OverlaysTab({
 }: OverlaysTabProps) {
   return (
     <>
-      <div className="setting-group-label">Overlays</div>
+      <div className="setting-group-label">Kaplamalar</div>
       <div className="setting-group">
-        <SettingRow icon={Volume2} label="Volume HUD" desc="Nectar volume overlay">
+        <SettingRow icon={Volume2} label="Ses HUD" desc="Nectar ses kaplaması">
           <label className="toggle-switch">
             <input type="checkbox" checked={volumeOverlayEnabled} onChange={toggleVolumeOverlay} />
             <span className="slider"></span>
@@ -34,7 +34,7 @@ export function OverlaysTab({
         </SettingRow>
 
         {volumeOverlayEnabled && (
-          <SettingRow icon={ArrowLeftToLine} label="Show on Edge Hover" desc="Slide in from left edge">
+          <SettingRow icon={ArrowLeftToLine} label="Kenar Üzerine Gelince Göster" desc="Sol kenardan kayarak açılır">
             <label className="toggle-switch">
               <input type="checkbox" checked={volumeEdgeEnabled} onChange={toggleVolumeEdge} />
               <span className="slider"></span>
@@ -42,7 +42,7 @@ export function OverlaysTab({
           </SettingRow>
         )}
 
-        <SettingRow icon={Sun} label="Brightness HUD" desc="Nectar brightness overlay">
+        <SettingRow icon={Sun} label="Parlaklık HUD" desc="Nectar parlaklık kaplaması">
           <label className="toggle-switch">
             <input type="checkbox" checked={brightnessOverlayEnabled} onChange={toggleBrightnessOverlay} />
             <span className="slider"></span>
@@ -50,7 +50,7 @@ export function OverlaysTab({
         </SettingRow>
 
         {brightnessOverlayEnabled && (
-          <SettingRow icon={ArrowRightToLine} label="Show on Edge Hover" desc="Slide in from right edge" divider={false}>
+          <SettingRow icon={ArrowRightToLine} label="Kenar Üzerine Gelince Göster" desc="Sağ kenardan kayarak açılır" divider={false}>
             <label className="toggle-switch">
               <input type="checkbox" checked={brightnessEdgeEnabled} onChange={toggleBrightnessEdge} />
               <span className="slider"></span>

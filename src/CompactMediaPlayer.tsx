@@ -185,7 +185,7 @@ export function CompactMediaPlayer({
               <motion.img
                 key={`art-${albumArtKey}`}
                 src={albumArtUrl}
-                alt="Art"
+                alt="Albüm Kapağı"
                 draggable={false}
                 initial={{ rotateY: 90, opacity: 0 }}
                 animate={{ rotateY: 0, opacity: 1 }}
@@ -249,7 +249,7 @@ export function CompactMediaPlayer({
           className="cmp-btn cmp-btn-side"
           onClick={(e) => { e.stopPropagation(); onVolumeExpandedChange(!volumeExpanded); }}
           whileTap={{ scale: 0.9 }}
-          data-tooltip="Volume"
+          data-tooltip="Ses"
         >
           <SpeakerIcon size={22} muted={volume === 0} />
         </motion.button>
@@ -292,7 +292,7 @@ export function CompactMediaPlayer({
             invoke('open_sound_settings').catch(() => {});
           }}
           whileTap={{ scale: 0.9 }}
-          data-tooltip="Audio Output"
+          data-tooltip="Ses Çıkışı"
         >
           <AudioOutputIcon size={22} />
         </motion.button>

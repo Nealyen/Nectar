@@ -121,50 +121,50 @@ export function NotchTab({
   const showPerMonitor = multiMonitor && perMonitor.enabled;
   return (
     <>
-      <div className="setting-group-label">Notch</div>
+      <div className="setting-group-label">Çentik</div>
       <div className="setting-group">
         {!showPerMonitor && (
-          <SettingRow icon={PanelTop} label="Notch Behavior" desc="Choose how the notch appears">
+          <SettingRow icon={PanelTop} label="Çentik Davranışı" desc="Çentiğin nasıl görüneceğini seçin">
             <Dropdown
               value={notchMode}
               onChange={setNotchModeValue}
               options={[
-                { value: "fixed", label: "Fixed" },
-                { value: "smart", label: "Smart" },
-                { value: "peek", label: "Peek" },
+                { value: "fixed", label: "Sabit" },
+                { value: "smart", label: "Akıllı" },
+                { value: "peek", label: "Gözat" },
               ]}
             />
           </SettingRow>
         )}
 
-        <SettingRow icon={MonitorCheck} label="Show On" desc="Choose which monitor(s) display the notch">
+        <SettingRow icon={MonitorCheck} label="Gösterilecek Ekran" desc="Çentiği hangi monitör(ler)in göstereceğini seçin">
           <Dropdown
             value={notchMonitorMode}
             onChange={(v) => setNotchMonitorModeValue(v as MonitorMode)}
             options={[
-              { value: "primary", label: "Primary Monitor" },
-              { value: "all", label: "All Monitors" },
-              { value: "specific", label: "Specific Monitor" },
+              { value: "primary", label: "Birincil Monitör" },
+              { value: "all", label: "Tüm Monitörler" },
+              { value: "specific", label: "Belirli Monitör" },
             ]}
           />
         </SettingRow>
 
         {notchMonitorMode === "specific" && (
-          <SettingRow icon={Monitor} label="Monitor" desc="Which display shows the notch">
+          <SettingRow icon={Monitor} label="Monitör" desc="Çentiği hangi ekranın göstereceğini seçin">
             <Dropdown
               value={notchMonitorId}
               onChange={setNotchMonitorIdValue}
-              placeholder={monitors.length === 0 ? "Loading..." : undefined}
+              placeholder={monitors.length === 0 ? "Yükleniyor..." : undefined}
               options={monitors.map((m) => ({
                 value: m.id,
-                label: `${m.label}${m.is_primary ? " (Primary)" : ""}`,
+                label: `${m.label}${m.is_primary ? " (Birincil)" : ""}`,
               }))}
             />
           </SettingRow>
         )}
 
         {multiMonitor && (
-          <SettingRow icon={Monitor} label="Per-Monitor Behavior" desc="Set a different behavior for each monitor">
+          <SettingRow icon={Monitor} label="Monitör Başına Davranış" desc="Her monitör için farklı bir davranış belirleyin">
             <label className="toggle-switch">
               <input type="checkbox" checked={perMonitor.enabled} onChange={perMonitor.toggle} />
               <span className="slider"></span>
@@ -173,20 +173,20 @@ export function NotchTab({
         )}
 
         {showPerMonitor && monitors.map((m) => (
-          <SettingRow key={m.id} icon={Monitor} label={`${m.label} Behavior`} desc={m.is_primary ? "Primary monitor" : undefined}>
+          <SettingRow key={m.id} icon={Monitor} label={`${m.label} Davranışı`} desc={m.is_primary ? "Birincil monitör" : undefined}>
             <Dropdown
               value={notchModeByMonitor[m.id] || notchMode}
               onChange={(v) => setNotchModeForMonitor(m.id, v)}
               options={[
-                { value: "fixed", label: "Fixed" },
-                { value: "smart", label: "Smart" },
-                { value: "peek", label: "Peek" },
+                { value: "fixed", label: "Sabit" },
+                { value: "smart", label: "Akıllı" },
+                { value: "peek", label: "Gözat" },
               ]}
             />
           </SettingRow>
         ))}
 
-        <SettingRow icon={Calendar} label="Calendar" desc="Day, week, month and agenda views in the notch">
+        <SettingRow icon={Calendar} label="Takvim" desc="Çentikte gün, hafta, ay ve ajanda görünümleri">
           <label className="toggle-switch">
             <input type="checkbox" checked={calendarEnabled} onChange={toggleCalendar} />
             <span className="slider"></span>
@@ -196,8 +196,8 @@ export function NotchTab({
         {calendarEnabled && (
           <SettingRow
             icon={CloudCog}
-            label="Calendar Sync"
-            desc={sources ? `${sources} source${sources === 1 ? "" : "s"} connected` : "Show your real events from Google, iCloud, Nextcloud and more"}
+            label="Takvim Senkronizasyonu"
+            desc={sources ? `${sources} kaynak bağlı` : "Google, iCloud, Nextcloud ve daha fazlasından gerçek etkinliklerinizi gösterin"}
             action
             onClick={onOpenCalendarSync}
           >
@@ -205,7 +205,7 @@ export function NotchTab({
           </SettingRow>
         )}
 
-        <SettingRow icon={Hourglass} label="Timer" desc="Countdown with presets and a custom time">
+        <SettingRow icon={Hourglass} label="Zamanlayıcı" desc="Ön ayarlar ve özel süre ile geri sayım">
           <label className="toggle-switch">
             <input type="checkbox" checked={timerEnabled} onChange={toggleTimerEnabled} />
             <span className="slider"></span>
@@ -213,7 +213,7 @@ export function NotchTab({
         </SettingRow>
 
         {timerEnabled && (
-          <SettingRow icon={BellRing} label="Timer Sound" desc="Play a chime when the timer finishes">
+          <SettingRow icon={BellRing} label="Zamanlayıcı Sesi" desc="Zamanlayıcı bittiğinde bir zil sesi çal">
             <label className="toggle-switch">
               <input type="checkbox" checked={timerSoundEnabled} onChange={toggleTimerSound} />
               <span className="slider"></span>
@@ -221,14 +221,14 @@ export function NotchTab({
           </SettingRow>
         )}
 
-        <SettingRow icon={Timer} label="Stopwatch" desc="Count up with laps">
+        <SettingRow icon={Timer} label="Kronometre" desc="Turlarla birlikte ileri sayım">
           <label className="toggle-switch">
             <input type="checkbox" checked={stopwatchEnabled} onChange={toggleStopwatchEnabled} />
             <span className="slider"></span>
           </label>
         </SettingRow>
 
-        <SettingRow icon={Music} label="Music Mode" desc="Interactive live music widget">
+        <SettingRow icon={Music} label="Müzik Modu" desc="Etkileşimli canlı müzik widget'ı">
           <label className="toggle-switch">
             <input type="checkbox" checked={musicModeEnabled} onChange={toggleMusicMode} />
             <span className="slider"></span>
@@ -237,32 +237,32 @@ export function NotchTab({
 
         {musicModeEnabled && (
           <>
-            <SettingRow icon={Minimize2} label="Compact Mode" desc="Show visualizer & artwork when collapsed">
+            <SettingRow icon={Minimize2} label="Kompakt Mod" desc="Daraltıldığında görselleştirici ve albüm kapağını göster">
               <label className="toggle-switch">
                 <input type="checkbox" checked={musicCompactNotch} onChange={toggleMusicCompactNotch} />
                 <span className="slider"></span>
               </label>
             </SettingRow>
 
-            <SettingRow icon={LayoutList} label="Media Layout" desc="Choose expanded player style">
+            <SettingRow icon={LayoutList} label="Medya Düzeni" desc="Genişletilmiş oynatıcı stilini seçin">
               <div className="unit-toggle-minimal wide">
                 <span className={mediaLayout === "classic" ? "active" : ""} onClick={() => toggleMediaLayout("classic")}>
-                  Classic
+                  Klasik
                 </span>
                 <span className={mediaLayout === "compact" ? "active" : ""} onClick={() => toggleMediaLayout("compact")}>
-                  Compact
+                  Kompakt
                 </span>
               </div>
             </SettingRow>
 
-            <SettingRow icon={Sparkles} label="Ambient Glow" desc="Colored glow behind expanded album art">
+            <SettingRow icon={Sparkles} label="Ortam Işıması" desc="Genişletilmiş albüm kapağının arkasında renkli ışıma">
               <label className="toggle-switch">
                 <input type="checkbox" checked={mediaAmbienceEnabled} onChange={toggleAmbience} />
                 <span className="slider"></span>
               </label>
             </SettingRow>
 
-            <SettingRow icon={Circle} label="Compact Glow" desc="Glow around collapsed thumbnail" divider={false}>
+            <SettingRow icon={Circle} label="Kompakt Işıma" desc="Daraltılmış küçük resmin etrafında ışıma" divider={false}>
               <label className="toggle-switch">
                 <input type="checkbox" checked={mediaCompactGlowEnabled} onChange={toggleCompactGlow} />
                 <span className="slider"></span>
@@ -272,9 +272,9 @@ export function NotchTab({
         )}
       </div>
 
-      <div className="setting-group-label">Weather</div>
+      <div className="setting-group-label">Hava Durumu</div>
       <div className="setting-group">
-        <SettingRow icon={CloudSun} label="Weather Status" desc={cityName || "Auto-detect location"}>
+        <SettingRow icon={CloudSun} label="Hava Durumu Durumu" desc={cityName || "Konumu otomatik algıla"}>
           <div className="weather-controls">
             <div className="unit-toggle-minimal" onClick={toggleTempUnit}>
               <span className={!tempUnitFahrenheit ? "active" : ""}>C</span>
@@ -292,7 +292,7 @@ export function NotchTab({
             <div className="city-input-row">
               <input
                 type="text"
-                placeholder="Search city..."
+                placeholder="Şehir ara..."
                 value={cityName}
                 onChange={(e) => setCityName(e.target.value)}
                 onFocus={() => citySearchResults.length > 0 && setShowCityDropdown(true)}
@@ -314,7 +314,7 @@ export function NotchTab({
                     e.preventDefault();
                     handleCityClear();
                   }}
-                  title="Clear city"
+                  title="Şehri temizle"
                 >
                   <X size={10} strokeWidth={2.5} />
                 </button>
@@ -341,7 +341,7 @@ export function NotchTab({
         )}
       </div>
 
-      <div className="setting-group-label">Widgets</div>
+      <div className="setting-group-label">Widget'lar</div>
       <div className="setting-group">
         <StatusWidgetConfig value={statusWidgets} onChange={handleWidgetsChange} hasBattery={hasBattery} />
       </div>

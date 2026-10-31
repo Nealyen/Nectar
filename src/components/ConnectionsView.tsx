@@ -33,7 +33,7 @@ const REFRESH_MS = 6000;
 function SignalBars({ signal }: { signal: number }) {
   const level = signal >= 75 ? 4 : signal >= 50 ? 3 : signal >= 25 ? 2 : 1;
   return (
-    <span className="cv-signal" aria-label={`Signal ${signal}%`}>
+    <span className="cv-signal" aria-label={`Sinyal ${signal}%`}>
       {[1, 2, 3, 4].map((bar) => (
         <i key={bar} className={bar <= level ? "on" : ""} style={{ height: 3 + bar * 2.5 }} />
       ))}
@@ -115,21 +115,21 @@ export function ConnectionsView({ kind, onBack, onOpenWindowsSettings }: Props) 
   const list = kind === "wifi" ? networks : kind === "audio" ? outputs : devices;
   const loading = list === null;
   const empty = list?.length === 0;
-  const title = kind === "wifi" ? "Wi-Fi networks" : kind === "audio" ? "Output devices" : "Bluetooth devices";
-  const emptyText = kind === "wifi" ? "No networks found" : kind === "audio" ? "No output devices" : "No paired devices";
+  const title = kind === "wifi" ? "Wi-Fi ağları" : kind === "audio" ? "Çıkış cihazları" : "Bluetooth cihazları";
+  const emptyText = kind === "wifi" ? "Ağ bulunamadı" : kind === "audio" ? "Çıkış cihazı yok" : "Eşleştirilmiş cihaz yok";
 
   return (
     <div className="cv-root" onClick={(e) => e.stopPropagation()}>
       <div className="cv-header">
-        <button className="cv-back" onClick={onBack} aria-label="Back">
+        <button className="cv-back" onClick={onBack} aria-label="Geri">
           <ChevronLeft size={16} />
         </button>
         <span className="cv-title">{title}</span>
-        <button className="cv-link" onClick={onOpenWindowsSettings}>Windows settings</button>
+        <button className="cv-link" onClick={onOpenWindowsSettings}>Windows ayarları</button>
       </div>
 
       <div className="cv-list">
-        {loading && <div className="cv-hint">{kind === "wifi" ? "Scanning…" : "Loading…"}</div>}
+        {loading && <div className="cv-hint">{kind === "wifi" ? "Taranıyor…" : "Yükleniyor…"}</div>}
         {!loading && empty && !error && <div className="cv-hint">{emptyText}</div>}
 
         {kind === "audio" && outputs?.map((o) => (
@@ -140,7 +140,7 @@ export function ConnectionsView({ kind, onBack, onOpenWindowsSettings }: Props) 
           >
             <Speaker size={13} className="cv-bt-icon" />
             <span className="cv-name">{o.name}</span>
-            {o.is_default ? <Check size={14} /> : <span className="cv-status">{busy === o.id ? "Switching…" : ""}</span>}
+            {o.is_default ? <Check size={14} /> : <span className="cv-status">{busy === o.id ? "Geçiş yapılıyor…" : ""}</span>}
           </div>
         ))}
 
@@ -153,16 +153,16 @@ export function ConnectionsView({ kind, onBack, onOpenWindowsSettings }: Props) 
               <SignalBars signal={n.signal} />
               <span className="cv-name">{n.ssid}</span>
               {n.secured && <Lock size={11} className="cv-lock" />}
-              <span className="cv-status">{busy === n.ssid ? "Connecting…" : n.connected ? "Connected" : n.known ? "Saved" : ""}</span>
+              <span className="cv-status">{busy === n.ssid ? "Bağlanıyor…" : n.connected ? "Bağlı" : n.known ? "Kayıtlı" : ""}</span>
               {n.connected && (
                 <button className="cv-action" onClick={(e) => { e.stopPropagation(); void run(n.ssid, () => invoke("wifi_disconnect")); }}>
-                  Disconnect
+                  Bağlantıyı kes
                 </button>
               )}
               {n.known && !n.connected && (
                 <button
                   className="cv-icon-btn"
-                  title="Forget network"
+                  title="Ağı unut"
                   onClick={(e) => { e.stopPropagation(); void run(n.ssid, () => invoke("wifi_forget", { ssid: n.ssid })); }}
                 >
                   <X size={12} />
@@ -176,10 +176,10 @@ export function ConnectionsView({ kind, onBack, onOpenWindowsSettings }: Props) 
                   autoFocus
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Network password"
+                  placeholder="Ağ parolası"
                   spellCheck={false}
                 />
-                <button type="submit" disabled={!password}>Join</button>
+                <button type="submit" disabled={!password}>Katıl</button>
               </form>
             )}
           </div>
@@ -189,16 +189,16 @@ export function ConnectionsView({ kind, onBack, onOpenWindowsSettings }: Props) 
           <div key={d.id} className={`cv-row${d.connected ? " connected" : ""}`}>
             <Bluetooth size={13} className="cv-bt-icon" />
             <span className="cv-name">{d.name}</span>
-            <span className="cv-status">{d.connected ? "Connected" : "Paired"}</span>
+            <span className="cv-status">{d.connected ? "Bağlı" : "Eşleştirildi"}</span>
             {confirmRemove === d.id ? (
               <button
                 className="cv-action danger"
                 onClick={() => { setConfirmRemove(null); void run(d.id, () => invoke("bluetooth_unpair", { id: d.id })); }}
               >
-                Remove?
+                Kaldırılsın mı?
               </button>
             ) : (
-              <button className="cv-icon-btn" title="Remove device" onClick={() => setConfirmRemove(d.id)}>
+              <button className="cv-icon-btn" title="Cihazı kaldır" onClick={() => setConfirmRemove(d.id)}>
                 <X size={12} />
               </button>
             )}
@@ -210,4 +210,3 @@ export function ConnectionsView({ kind, onBack, onOpenWindowsSettings }: Props) 
     </div>
   );
 }
-

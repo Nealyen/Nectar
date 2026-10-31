@@ -40,23 +40,23 @@ export function AppearanceTab({
 
   return (
     <>
-      <div className="setting-group-label">Theme</div>
+      <div className="setting-group-label">Tema</div>
       <div className="setting-group">
-        <SettingRow icon={Palette} label="Theme Mode" desc="Configure visual styling">
+        <SettingRow icon={Palette} label="Tema Modu" desc="Görsel stili yapılandırın">
           <Dropdown
             value={themeMode}
             onChange={handleThemeModeChange}
             options={[
-              { value: "dark", label: "Dark (Translucent)" },
-              { value: "light", label: "Light (Translucent)" },
-              { value: "custom", label: "Custom Color" },
-              { value: "adaptive", label: "Adaptive Accent" },
+              { value: "dark", label: "Koyu (Yarı Saydam)" },
+              { value: "light", label: "Açık (Yarı Saydam)" },
+              { value: "custom", label: "Özel Renk" },
+              { value: "adaptive", label: "Uyarlanabilir Vurgu" },
             ]}
           />
         </SettingRow>
 
         {showCustomColor && (
-          <SettingRow icon={Droplet} label="Custom Theme Color" desc="Choose layout background color">
+          <SettingRow icon={Droplet} label="Özel Tema Rengi" desc="Arayüz arka plan rengini seçin">
             <div className="color-picker-row">
               <input
                 type="color"
@@ -71,8 +71,8 @@ export function AppearanceTab({
 
         <SettingRow
           icon={Contrast}
-          label="Background Opacity"
-          desc={`Adjust theme transparency (${Math.round(themeOpacity * 100)}%)`}
+          label="Arka Plan Opaklığı"
+          desc={`Tema saydamlığını ayarlayın (${Math.round(themeOpacity * 100)}%)`}
           divider={showAdvancedSliders}
         >
           <input
@@ -90,8 +90,8 @@ export function AppearanceTab({
           <>
             <SettingRow
               icon={Droplets}
-              label="Color Saturation"
-              desc={`Adjust theme color vibrancy (${Math.round(themeSaturation * 100)}%)`}
+              label="Renk Doygunluğu"
+              desc={`Tema rengi canlılığını ayarlayın (${Math.round(themeSaturation * 100)}%)`}
             >
               <input
                 type="range"
@@ -106,8 +106,8 @@ export function AppearanceTab({
 
             <SettingRow
               icon={Sun}
-              label="Background Brightness"
-              desc={`Adjust background lightness (${Math.round(themeBrightness * 100)}%)`}
+              label="Arka Plan Parlaklığı"
+              desc={`Arka plan açıklığını ayarlayın (${Math.round(themeBrightness * 100)}%)`}
               divider={false}
             >
               <input
@@ -124,9 +124,9 @@ export function AppearanceTab({
         )}
       </div>
 
-      <div className="setting-group-label">Display</div>
+      <div className="setting-group-label">Görünüm</div>
       <div className="setting-group">
-        <SettingRow icon={Square} label="Screen Corners" desc="Rounded top edges">
+        <SettingRow icon={Square} label="Ekran Köşeleri" desc="Yuvarlatılmış üst kenarlar">
           <label className="toggle-switch">
             <input type="checkbox" checked={cornersEnabled} onChange={toggleCorners} />
             <span className="slider"></span>
@@ -135,8 +135,8 @@ export function AppearanceTab({
 
         <SettingRow
           icon={Maximize2}
-          label="UI & Font Scale"
-          desc={`Adjust desktop size (${Math.round(scale * 100)}%)`}
+          label="Arayüz ve Yazı Tipi Ölçeği"
+          desc={`Masaüstü boyutunu ayarlayın (${Math.round(scale * 100)}%)`}
           divider={false}
         >
           <div className="scale-button-container">
@@ -144,7 +144,7 @@ export function AppearanceTab({
               onClick={() => handleScaleChange(Math.max(0.8, parseFloat((scale - 0.1).toFixed(1))))}
               disabled={scale <= 0.8}
               className="scale-adjust-btn"
-              title="Decrease Scale"
+              title="Ölçeği Azalt"
             >
               —
             </button>
@@ -153,7 +153,7 @@ export function AppearanceTab({
               onClick={() => handleScaleChange(Math.min(1.3, parseFloat((scale + 0.1).toFixed(1))))}
               disabled={scale >= 1.3}
               className="scale-adjust-btn"
-              title="Increase Scale"
+              title="Ölçeği Artır"
             >
               +
             </button>

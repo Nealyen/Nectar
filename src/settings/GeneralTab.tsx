@@ -32,23 +32,23 @@ export function GeneralTab({
 }: GeneralTabProps) {
   return (
     <>
-      <div className="setting-group-label">System</div>
+      <div className="setting-group-label">Sistem</div>
       <div className="setting-group">
-        <SettingRow icon={Power} label="Launch at Login" desc="Open Nectar automatically">
+        <SettingRow icon={Power} label="Girişte Başlat" desc="Nectar'ı otomatik olarak aç">
           <label className="toggle-switch">
             <input type="checkbox" checked={autostart} onChange={toggleAutostart} />
             <span className="slider"></span>
           </label>
         </SettingRow>
 
-        <SettingRow icon={Download} label="Update Indicator" desc="Show green dot when update available">
+        <SettingRow icon={Download} label="Güncelleme Göstergesi" desc="Güncelleme mevcut olduğunda yeşil nokta göster">
           <label className="toggle-switch">
             <input type="checkbox" checked={showUpdateIndicator} onChange={toggleUpdateIndicator} />
             <span className="slider"></span>
           </label>
         </SettingRow>
 
-        <SettingRow icon={Clock} label="24-Hour Time" desc="Use 24-hour clock format">
+        <SettingRow icon={Clock} label="24 Saat Formatı" desc="24 saatlik saat biçimini kullan">
           <label className="toggle-switch">
             <input type="checkbox" checked={timeFormat24h} onChange={toggleTimeFormat24h} />
             <span className="slider"></span>
@@ -57,8 +57,8 @@ export function GeneralTab({
 
         <SettingRow
           icon={History}
-          label="Legacy Mode"
-          desc="Keep the classic notch and dock. Turns off features added since 1.4"
+          label="Eski Mod"
+          desc="Klasik çentik ve dock'u koru. 1.4 sürümünden bu yana eklenen özellikleri kapatır"
         >
           <label className="toggle-switch">
             <input type="checkbox" checked={legacyMode} onChange={toggleLegacyMode} />
@@ -68,8 +68,8 @@ export function GeneralTab({
 
         <SettingRow
           icon={BatteryWarning}
-          label="Low Battery Alert"
-          desc={`Trigger at ${lowBatteryThreshold}%`}
+          label="Düşük Pil Uyarısı"
+          desc={`%${lowBatteryThreshold} seviyesinde tetikle`}
           divider={false}
         >
           <input
@@ -84,10 +84,10 @@ export function GeneralTab({
         </SettingRow>
       </div>
 
-      <div className="setting-group-label">App</div>
+      <div className="setting-group-label">Uygulama</div>
       <div className="setting-group">
-        <SettingRow icon={RefreshCw} label="Restart Nectar" desc="Reinitialize all components" action onClick={restartNectar} />
-        <SettingRow icon={LogOut} label="Quit Nectar" desc="Exit application completely" action danger onClick={quitNectar} divider={false} />
+        <SettingRow icon={RefreshCw} label="Nectar'ı Yeniden Başlat" desc="Tüm bileşenleri yeniden başlat" action onClick={restartNectar} />
+        <SettingRow icon={LogOut} label="Nectar'dan Çık" desc="Uygulamadan tamamen çık" action danger onClick={quitNectar} divider={false} />
       </div>
     </>
   );

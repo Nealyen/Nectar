@@ -13,10 +13,10 @@ import "./Calendar.css";
 type View = "day" | "week" | "month" | "agenda";
 
 const VIEWS: { id: View; label: string }[] = [
-  { id: "day", label: "Day" },
-  { id: "week", label: "Week" },
-  { id: "month", label: "Month" },
-  { id: "agenda", label: "Agenda" },
+  { id: "day", label: "Gün" },
+  { id: "week", label: "Hafta" },
+  { id: "month", label: "Ay" },
+  { id: "agenda", label: "Ajanda" },
 ];
 
 const VIEW_KEY = "nectar-calendar-window-view";
@@ -64,12 +64,12 @@ function readHidden(): Set<string> {
 }
 
 function ago(ms: number | null): string {
-  if (!ms) return "never";
+  if (!ms) return "hiç";
   const mins = Math.round((Date.now() - ms) / 60000);
-  if (mins < 1) return "just now";
-  if (mins < 60) return `${mins} min ago`;
+  if (mins < 1) return "az önce";
+  if (mins < 60) return `${mins} dk önce`;
   const hours = Math.round(mins / 60);
-  return hours < 24 ? `${hours} h ago` : `${Math.round(hours / 24)} d ago`;
+  return hours < 24 ? `${hours} sa önce` : `${Math.round(hours / 24)} g önce`;
 }
 
 function colorStyle(e: CalEvent): React.CSSProperties {
@@ -156,7 +156,7 @@ function CalendarWindow() {
   } else if (view === "day") {
     title = anchor.toLocaleDateString("default", { weekday: "long", month: "long", day: "numeric" });
   } else if (view === "agenda") {
-    title = "Upcoming";
+    title = "Yaklaşan";
   } else {
     title = anchor.toLocaleDateString("default", { month: "long", year: "numeric" });
   }
@@ -167,14 +167,14 @@ function CalendarWindow() {
     <div className="cw">
       <div className="cw-titlebar" data-tauri-drag-region>
         <span className="cw-title-text" data-tauri-drag-region>
-          Calendar
+          Takvim
         </span>
         <WindowControls />
       </div>
 
       <div className="cw-body">
         <aside className="cw-sidebar">
-          <div className="cw-label">Calendars</div>
+          <div className="cw-label">Takvimler</div>
           <ul className="cw-sources">
             {state.calendars.map((c) => {
               const off = hidden.has(c.name);
@@ -190,19 +190,19 @@ function CalendarWindow() {
                 </li>
               );
             })}
-            {state.calendars.length === 0 && <li className="cw-muted">No calendars yet</li>}
+            {state.calendars.length === 0 && <li className="cw-muted">Henüz takvim yok</li>}
           </ul>
 
           <div className="cw-sidebar-foot">
             <div className="cw-sync-row">
-              <span>Synced {syncing ? "now…" : ago(state.syncedAt)}</span>
+              <span>Senkronize edildi {syncing ? "şimdi…" : ago(state.syncedAt)}</span>
               <button onClick={sync} disabled={syncing || !state.connected}>
-                <RefreshCw size={11} className={syncing ? "spin" : ""} /> Sync
+                <RefreshCw size={11} className={syncing ? "spin" : ""} /> Senkronize et
               </button>
             </div>
             {syncError && <div className="cw-error">{syncError}</div>}
             <button className="cw-manage" onClick={manageSources}>
-              <SettingsIcon size={12} /> Manage sources
+              <SettingsIcon size={12} /> Kaynakları yönet
             </button>
           </div>
         </aside>
@@ -210,12 +210,12 @@ function CalendarWindow() {
         <main className="cw-main">
           {!state.connected ? (
             <div className="cw-empty-state">
-              <div className="cw-empty-title">No calendar connected</div>
+              <div className="cw-empty-title">Bağlı takvim yok</div>
               <div className="cw-empty-text">
-                Add a Google, iCloud or Outlook calendar link, or connect Nextcloud, to see your events here.
+                Etkinliklerinizi burada görmek için bir Google, iCloud veya Outlook takvim bağlantısı ekleyin ya da Nextcloud'a bağlanın.
               </div>
               <button className="cw-primary" onClick={manageSources}>
-                Set up Calendar Sync
+                Takvim Senkronizasyonunu Ayarla
               </button>
             </div>
           ) : (
@@ -239,12 +239,12 @@ function CalendarWindow() {
                   {view !== "agenda" && (
                     <div className="cw-nav">
                       <button className="cw-today" onClick={() => setAnchor(today)}>
-                        Today
+                        Bugün
                       </button>
-                      <button aria-label="Previous" onClick={() => shift(-1)}>
+                      <button aria-label="Önceki" onClick={() => shift(-1)}>
                         <ChevronLeft size={15} />
                       </button>
-                      <button aria-label="Next" onClick={() => shift(1)}>
+                      <button aria-label="Sonraki" onClick={() => shift(1)}>
                         <ChevronRight size={15} />
                       </button>
                     </div>
@@ -258,10 +258,10 @@ function CalendarWindow() {
                     {anchor.toLocaleDateString("default", { weekday: "long", month: "long", day: "numeric" })}
                   </span>
                   <span className="cw-selected-count">
-                    {selectedEvents.length === 0 ? "No events" : `${selectedEvents.length} event${selectedEvents.length === 1 ? "" : "s"}`}
+                    {selectedEvents.length === 0 ? "Etkinlik yok" : `${selectedEvents.length} etkinlik`}
                   </span>
                   <button className="cw-primary small" onClick={() => openDay(anchor)}>
-                    Open day &#8250;
+                    Günü aç &#8250;
                   </button>
                 </div>
               )}
@@ -287,7 +287,7 @@ function DayNumber({ day, today, muted }: { day: Date; today: Date; muted?: bool
 function Chip({ event, time, stacked }: { event: CalEvent; time?: (ms: number) => string; stacked?: boolean }) {
   return (
     <div className={`cw-chip${stacked ? " stacked" : ""}`} style={colorStyle(event)}>
-      {time && <i>{event.allDay ? "All day" : time(event.start)}</i>}
+      {time && <i>{event.allDay ? "Tüm gün" : time(event.start)}</i>}
       <span>{event.title}</span>
     </div>
   );
@@ -353,7 +353,7 @@ function MonthView({ anchor, today, events, time, onSelect, onOpen }: MonthProps
   return (
     <div ref={wrapRef} className="cw-month">
       <div className="cw-dow">
-        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((d) => (
+        {["Paz", "Pzt", "Sal", "Çar", "Per", "Cum", "Cmt"].map((d) => (
           <div key={d}>{d}</div>
         ))}
       </div>
@@ -394,7 +394,7 @@ function MonthView({ anchor, today, events, time, onSelect, onOpen }: MonthProps
                 {shown.map((e, i) => (
                   <Chip key={`${e.uid}-${e.start}-${i}`} event={e} />
                 ))}
-                {extra > 0 && <span className="cw-more">+{extra} more</span>}
+                {extra > 0 && <span className="cw-more">+{extra} daha</span>}
                 {compact && (
                   <span className="cw-compact">
                     {colors.map((color) => (
@@ -418,12 +418,12 @@ function MonthView({ anchor, today, events, time, onSelect, onOpen }: MonthProps
             <div key={`${e.uid}-${e.start}-${i}`} className="cw-hover-row" style={colorStyle(e)}>
               <span className="cw-hover-name">{e.title}</span>
               <span className="cw-hover-meta">
-                {e.allDay ? "All day" : `${time(e.start)} – ${time(e.end)}`}
+                {e.allDay ? "Tüm gün" : `${time(e.start)} – ${time(e.end)}`}
                 {e.location ? ` · ${e.location}` : ""}
               </span>
             </div>
           ))}
-          {hoverList.length > 6 && <div className="cw-hover-more">+{hoverList.length - 6} more</div>}
+          {hoverList.length > 6 && <div className="cw-hover-more">+{hoverList.length - 6} daha</div>}
         </div>
       )}
     </div>
@@ -447,7 +447,7 @@ function WeekView({ anchor, today, events, time, onOpen }: { anchor: Date; today
               {list.map((e, k) => (
                 <Chip key={`${e.uid}-${e.start}-${k}`} event={e} time={time} stacked />
               ))}
-              {list.length === 0 && <span className="cw-muted center">Free</span>}
+              {list.length === 0 && <span className="cw-muted center">Boş</span>}
             </div>
           </div>
         );
@@ -459,7 +459,7 @@ function WeekView({ anchor, today, events, time, onOpen }: { anchor: Date; today
 function DayView({ day, events, time }: { day: Date; events: CalEvent[]; time: (ms: number) => string }) {
   const list = eventsOn(events, day);
   const [nowMs] = useState(() => Date.now());
-  if (list.length === 0) return <div className="cw-empty-day">Nothing planned</div>;
+  if (list.length === 0) return <div className="cw-empty-day">Planlanmış bir şey yok</div>;
   return (
     <div className="cw-list">
       {list.map((e, i) => {
@@ -468,7 +468,7 @@ function DayView({ day, events, time }: { day: Date; events: CalEvent[]; time: (
           <div key={`${e.uid}-${e.start}-${i}`} className="cw-day-event" style={colorStyle(e)}>
             <span className="cw-day-time">
               {e.allDay ? (
-                <b>All day</b>
+                <b>Tüm gün</b>
               ) : (
                 <>
                   <b>{time(e.start)}</b>
@@ -479,7 +479,7 @@ function DayView({ day, events, time }: { day: Date; events: CalEvent[]; time: (
             <span className="cw-day-body">
               <span className="cw-day-title">
                 {e.title}
-                {live && <em>Now</em>}
+                {live && <em>Şimdi</em>}
               </span>
               <span className="cw-day-meta">{[e.location, e.calendar].filter(Boolean).join(" · ")}</span>
             </span>
@@ -495,12 +495,12 @@ function AgendaView({ today, events, time, onOpen }: { today: Date; events: CalE
     .map((day) => ({ day, list: eventsOn(events, day) }))
     .filter((g) => g.list.length > 0);
 
-  if (groups.length === 0) return <div className="cw-empty-day">Nothing in the next 30 days</div>;
+  if (groups.length === 0) return <div className="cw-empty-day">Önümüzdeki 30 günde bir şey yok</div>;
 
   const heading = (day: Date) => {
     const diff = Math.round((day.getTime() - today.getTime()) / 86_400_000);
-    if (diff === 0) return "Today";
-    if (diff === 1) return "Tomorrow";
+    if (diff === 0) return "Bugün";
+    if (diff === 1) return "Yarın";
     return day.toLocaleDateString("default", { weekday: "long", month: "short", day: "numeric" });
   };
 

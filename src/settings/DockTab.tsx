@@ -136,7 +136,7 @@ export function DockTab({
     <>
       <div className="setting-group-label">Dock</div>
       <div className="setting-group">
-        <SettingRow icon={Monitor} label="Nectar Dock" desc="Replace Windows taskbar">
+        <SettingRow icon={Monitor} label="Nectar Dock" desc="Windows görev çubuğunu değiştir">
           <label className="toggle-switch">
             <input type="checkbox" checked={dockEnabled} onChange={toggleDock} />
             <span className="slider"></span>
@@ -146,47 +146,47 @@ export function DockTab({
         {dockEnabled && (
           <>
             {!showPerMonitor && (
-              <SettingRow icon={dockMode === "fixed" ? EyeOff : Eye} label="Behavior" desc="Choose how the dock appears">
+              <SettingRow icon={dockMode === "fixed" ? EyeOff : Eye} label="Davranış" desc="Dock'un nasıl görüneceğini seçin">
                 <Dropdown
                   value={dockMode}
                   onChange={setDockModeValue}
                   options={[
-                    { value: "fixed", label: "Fixed" },
-                    { value: "smart", label: "Smart" },
-                    { value: "peek", label: "Peek" },
+                    { value: "fixed", label: "Sabit" },
+                    { value: "smart", label: "Akıllı" },
+                    { value: "peek", label: "Gözat" },
                   ]}
                 />
               </SettingRow>
             )}
 
-            <SettingRow icon={MonitorCheck} label="Show On" desc="Choose which monitor(s) display the dock">
+            <SettingRow icon={MonitorCheck} label="Şurada Göster" desc="Dock'un hangi monitör(ler)de görüntüleneceğini seçin">
               <Dropdown
                 value={dockMonitorMode}
                 onChange={(v) => setDockMonitorModeValue(v as MonitorMode)}
                 options={[
-                  { value: "primary", label: "Primary Monitor" },
-                  { value: "all", label: "All Monitors" },
-                  { value: "specific", label: "Specific Monitor" },
+                  { value: "primary", label: "Birincil Monitör" },
+                  { value: "all", label: "Tüm Monitörler" },
+                  { value: "specific", label: "Belirli Monitör" },
                 ]}
               />
             </SettingRow>
 
             {dockMonitorMode === "specific" && (
-              <SettingRow icon={Monitor} label="Monitor" desc="Which display shows the dock">
+              <SettingRow icon={Monitor} label="Monitör" desc="Dock'un hangi ekranda gösterileceği">
                 <Dropdown
                   value={dockMonitorId}
                   onChange={setDockMonitorIdValue}
-                  placeholder={monitors.length === 0 ? "Loading..." : undefined}
+                  placeholder={monitors.length === 0 ? "Yükleniyor..." : undefined}
                   options={monitors.map((m) => ({
                     value: m.id,
-                    label: `${m.label}${m.is_primary ? " (Primary)" : ""}`,
+                    label: `${m.label}${m.is_primary ? " (Birincil)" : ""}`,
                   }))}
                 />
               </SettingRow>
             )}
 
             {multiMonitor && (
-              <SettingRow icon={Monitor} label="Per-Monitor Behavior" desc="Set a different behavior for each monitor">
+              <SettingRow icon={Monitor} label="Monitör Başına Davranış" desc="Her monitör için farklı bir davranış ayarlayın">
                 <label className="toggle-switch">
                   <input type="checkbox" checked={perMonitor.enabled} onChange={perMonitor.toggle} />
                   <span className="slider"></span>
@@ -195,34 +195,34 @@ export function DockTab({
             )}
 
             {showPerMonitor && monitors.map((m) => (
-              <SettingRow key={m.id} icon={Monitor} label={`${m.label} Behavior`} desc={m.is_primary ? "Primary monitor" : undefined}>
+              <SettingRow key={m.id} icon={Monitor} label={`${m.label} Davranışı`} desc={m.is_primary ? "Birincil monitör" : undefined}>
                 <Dropdown
                   value={dockModeByMonitor[m.id] || dockMode}
                   onChange={(v) => setDockModeForMonitor(m.id, v)}
                   options={[
-                    { value: "fixed", label: "Fixed" },
-                    { value: "smart", label: "Smart" },
-                    { value: "peek", label: "Peek" },
+                    { value: "fixed", label: "Sabit" },
+                    { value: "smart", label: "Akıllı" },
+                    { value: "peek", label: "Gözat" },
                   ]}
                 />
               </SettingRow>
             ))}
 
-            <SettingRow icon={Eye} label="Show App Previews" desc="Show window thumbnails on hover">
+            <SettingRow icon={Eye} label="Uygulama Önizlemelerini Göster" desc="Üzerine gelindiğinde pencere küçük resimlerini göster">
               <label className="toggle-switch">
                 <input type="checkbox" checked={dockPreviewEnabled} onChange={toggleDockPreview} />
                 <span className="slider"></span>
               </label>
             </SettingRow>
 
-            <SettingRow icon={Search} label="Search Icon" desc="Show a Windows Search shortcut next to Start">
+            <SettingRow icon={Search} label="Arama Simgesi" desc="Başlat'ın yanında bir Windows Arama kısayolu göster">
               <label className="toggle-switch">
                 <input type="checkbox" checked={dockSearchEnabled} onChange={toggleDockSearch} />
                 <span className="slider"></span>
               </label>
             </SettingRow>
 
-            <SettingRow icon={CalendarDays} label="Calendar Icon" desc="Show a shortcut that opens the Calendar window">
+            <SettingRow icon={CalendarDays} label="Takvim Simgesi" desc="Takvim penceresini açan bir kısayol göster">
               <label className="toggle-switch">
                 <input type="checkbox" checked={dockCalendarEnabled} onChange={toggleDockCalendar} />
                 <span className="slider"></span>
@@ -231,21 +231,21 @@ export function DockTab({
 
             {!legacyMode && (
               <>
-                <SettingRow icon={ChevronUp} label="Hidden Icons Button" desc="Show the ^ button that opens the tray icons popup">
+                <SettingRow icon={ChevronUp} label="Gizli Simgeler Düğmesi" desc="Sistem tepsisi simgeleri açılır penceresini açan ^ düğmesini göster">
                   <label className="toggle-switch">
                     <input type="checkbox" checked={dockTray} onChange={toggleDockTray} />
                     <span className="slider"></span>
                   </label>
                 </SettingRow>
 
-                <SettingRow icon={LayoutGrid} label="Task View Icon" desc="Show a Task View button next to Start">
+                <SettingRow icon={LayoutGrid} label="Görev Görünümü Simgesi" desc="Başlat'ın yanında bir Görev Görünümü düğmesi göster">
                   <label className="toggle-switch">
                     <input type="checkbox" checked={dockTaskView} onChange={toggleDockTaskView} />
                     <span className="slider"></span>
                   </label>
                 </SettingRow>
 
-                <SettingRow icon={Trash2} label="Recycle Bin" desc="Show the Recycle Bin in the dock">
+                <SettingRow icon={Trash2} label="Geri Dönüşüm Kutusu" desc="Geri Dönüşüm Kutusu'nu dock'ta göster">
                   <label className="toggle-switch">
                     <input type="checkbox" checked={dockRecycle} onChange={toggleDockRecycle} />
                     <span className="slider"></span>
@@ -256,8 +256,8 @@ export function DockTab({
                   <SettingRow
                     key={d.letter}
                     icon={HardDrive}
-                    label={`Drive ${d.letter}:`}
-                    desc={d.label ? `${d.label}${d.removable ? " (removable)" : ""}` : d.removable ? "Removable drive" : "Local disk"}
+                    label={`Sürücü ${d.letter}:`}
+                    desc={d.label ? `${d.label}${d.removable ? " (çıkarılabilir)" : ""}` : d.removable ? "Çıkarılabilir sürücü" : "Yerel disk"}
                   >
                     <label className="toggle-switch">
                       <input type="checkbox" checked={dockDrives.includes(d.letter)} onChange={() => toggleDockDrive(d.letter)} />
@@ -268,14 +268,14 @@ export function DockTab({
               </>
             )}
 
-            <SettingRow icon={Circle} label="Icon Only" desc="Remove icon background and padding">
+            <SettingRow icon={Circle} label="Yalnızca Simge" desc="Simge arka planını ve dolguyu kaldır">
               <label className="toggle-switch">
                 <input type="checkbox" checked={dockIconOnly} onChange={toggleDockIconOnly} />
                 <span className="slider"></span>
               </label>
             </SettingRow>
 
-            <SettingRow icon={Keyboard} label="Win+Number Shortcuts" desc="Open pinned apps with Win+1 through Win+9">
+            <SettingRow icon={Keyboard} label="Win+Sayı Kısayolları" desc="Sabitlenmiş uygulamaları Win+1 ile Win+9 arası tuşlarla aç">
               <label className="toggle-switch">
                 <input type="checkbox" checked={dockWinNumberEnabled} onChange={toggleDockWinNumber} />
                 <span className="slider"></span>
@@ -283,7 +283,7 @@ export function DockTab({
             </SettingRow>
 
             {dockMode === "fixed" && (
-              <SettingRow icon={Maximize2} label="Adaptive Mode" desc="Stretch to full width when a window is maximized">
+              <SettingRow icon={Maximize2} label="Uyarlanabilir Mod" desc="Bir pencere tam ekran yapıldığında tam genişliğe uzat">
                 <label className="toggle-switch">
                   <input type="checkbox" checked={dockAdaptive} onChange={toggleDockAdaptive} />
                   <span className="slider"></span>
@@ -293,8 +293,8 @@ export function DockTab({
 
             <SettingRow
               icon={Shuffle}
-              label="Mix Pinned & Running"
-              desc={dockMixedReorder ? "Drag icons anywhere, pinned or not" : "Pinned and running icons stay in separate groups"}
+              label="Sabitlenmiş ve Çalışanları Karıştır"
+              desc={dockMixedReorder ? "Simgeleri sabitlenmiş olsun olmasın istediğiniz yere sürükleyin" : "Sabitlenmiş ve çalışan simgeler ayrı gruplarda kalır"}
             >
               <label className="toggle-switch">
                 <input type="checkbox" checked={dockMixedReorder} onChange={toggleDockMixedReorder} />
@@ -308,8 +308,8 @@ export function DockTab({
                   <Sparkles size={14} strokeWidth={1.5} />
                 </div>
                 <div className="setting-info">
-                  <span className="setting-label">Start Menu Icon</span>
-                  <span className="setting-desc">Choose the dock start button icon</span>
+                  <span className="setting-label">Başlat Menüsü Simgesi</span>
+                  <span className="setting-desc">Dock başlat düğmesi simgesini seçin</span>
                 </div>
               </div>
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", paddingLeft: "34px" }}>
@@ -326,12 +326,12 @@ export function DockTab({
                 <div
                   onClick={() => document.getElementById("start-icon-file-input")?.click()}
                   style={startIconTileStyle(startIcon.startsWith("custom:"))}
-                  title="Custom icon"
+                  title="Özel simge"
                 >
                   {startIcon.startsWith("custom:") ? (
                     <img
                       src={startIcon.replace("custom:", "")}
-                      alt="Custom"
+                      alt="Özel"
                       style={{ width: "100%", height: "100%", objectFit: "contain", borderRadius: "8px" }}
                       draggable={false}
                     />
@@ -340,7 +340,7 @@ export function DockTab({
                   )}
                 </div>
                 {startIcon !== "default" && (
-                  <div onClick={() => handleStartIconChange("default")} style={startIconTileStyle(false)} title="Reset to default">
+                  <div onClick={() => handleStartIconChange("default")} style={startIconTileStyle(false)} title="Varsayılana sıfırla">
                     <RotateCcw size={18} strokeWidth={1.5} />
                   </div>
                 )}

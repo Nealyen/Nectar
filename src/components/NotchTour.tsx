@@ -11,25 +11,25 @@ interface Step {
 const STEPS: Step[] = [
   {
     icon: <Sparkles size={18} />,
-    title: "Welcome to Nectar",
-    text: "Hover the notch to open it. Scroll over it to switch between music, status, calendar and the Control Center.",
+    title: "Nectar'a Hoş Geldiniz",
+    text: "Açmak için çentiğin üzerine gelin. Müzik, durum, takvim ve Kontrol Merkezi arasında geçiş yapmak için üzerinde kaydırın.",
   },
   {
     icon: <SlidersHorizontal size={18} />,
-    title: "Control Center",
-    text: "Wi-Fi, Bluetooth, volume and brightness live here. Click › on the Wi-Fi or Bluetooth tile to see networks and devices.",
-    action: { label: "Open it", id: "control-center" },
+    title: "Kontrol Merkezi",
+    text: "Wi-Fi, Bluetooth, ses ve parlaklık burada. Ağları ve cihazları görmek için Wi-Fi veya Bluetooth kutucuğundaki › simgesine tıklayın.",
+    action: { label: "Aç", id: "control-center" },
   },
   {
     icon: <PanelBottom size={18} />,
-    title: "The dock",
-    text: "Drag icons to reorder, right-click for options, middle-click to open a new window. Add Task View, drives or the Recycle Bin in Settings > Dock.",
+    title: "Dock",
+    text: "Sıralamayı değiştirmek için simgeleri sürükleyin, seçenekler için sağ tıklayın, yeni pencere açmak için orta tıklayın. Ayarlar > Dock bölümünden Görev Görünümü, sürücüler veya Geri Dönüşüm Kutusu ekleyin.",
   },
   {
     icon: <Settings2 size={18} />,
-    title: "Make it yours",
-    text: "Themes, notch and dock modes and per-monitor options are in Settings. Prefer the classic look? Turn on Legacy Mode in Settings > General.",
-    action: { label: "Open Settings", id: "settings" },
+    title: "Kendinize göre uyarlayın",
+    text: "Temalar, çentik ve dock modları ile monitör başına seçenekler Ayarlar'da. Klasik görünümü mü tercih ediyorsunuz? Ayarlar > Genel bölümünden Eski Mod'u açın.",
+    action: { label: "Ayarları Aç", id: "settings" },
   },
 ];
 
@@ -49,7 +49,7 @@ export function NotchTour({ step, onStep, onClose, onAction }: Props) {
       <div className="tour-head">
         <span className="tour-icon">{current.icon}</span>
         <span className="tour-title">{current.title}</span>
-        <button className="tour-skip" onClick={onClose}>Skip</button>
+        <button className="tour-skip" onClick={onClose}>Atla</button>
       </div>
       <p className="tour-text">{current.text}</p>
       <div className="tour-foot">
@@ -64,10 +64,10 @@ export function NotchTour({ step, onStep, onClose, onAction }: Props) {
           </button>
         )}
         {step > 0 && (
-          <button className="tour-btn ghost" onClick={() => onStep(step - 1)}>Back</button>
+          <button className="tour-btn ghost" onClick={() => onStep(step - 1)}>Geri</button>
         )}
         <button className="tour-btn" onClick={() => (last ? onClose() : onStep(step + 1))}>
-          {last ? "Done" : "Next"}
+          {last ? "Bitti" : "İleri"}
         </button>
       </div>
     </div>

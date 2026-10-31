@@ -23,12 +23,12 @@ import "./Settings.css";
 const appWindow = getCurrentWebviewWindow();
 
 const TABS: { id: SettingsTab; label: string; icon: typeof Settings }[] = [
-  { id: "general", label: "General", icon: Settings },
-  { id: "appearance", label: "Appearance", icon: Palette },
-  { id: "notch", label: "Notch", icon: PanelTop },
+  { id: "general", label: "Genel", icon: Settings },
+  { id: "appearance", label: "Görünüm", icon: Palette },
+  { id: "notch", label: "Çentik", icon: PanelTop },
   { id: "dock", label: "Dock", icon: Monitor },
-  { id: "overlays", label: "Overlays", icon: Layers },
-  { id: "about", label: "About", icon: Info },
+  { id: "overlays", label: "Kaplamalar", icon: Layers },
+  { id: "about", label: "Hakkında", icon: Info },
 ];
 
 function SettingsApp() {
@@ -70,7 +70,7 @@ function SettingsApp() {
     <div className="settings-container" style={{ zoom: settings.scale }}>
       <div className="title-bar" data-tauri-drag-region>
         <span className="title-text" data-tauri-drag-region>
-          Settings
+          Ayarlar
         </span>
         <WindowControls />
       </div>
